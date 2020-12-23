@@ -9,18 +9,30 @@ app.listen(3000,()=>{console.log('Estoy vivo');})
     res.send('Hello World')
 });
 
-app.get('/user',(req,res)=>{
+/* app.get('/user',(req,res)=>{
     var person = {
         id: 1,
         nombre:'Erik',
         apellido: 'Murillo'
     };
     res.send(person);
-}); 
+});  */
 
 app.get('/inventario', (req, res) => {
-    let wData = fs.readFileSync('./inventario.txt', 'utf8');
-    let wProducts = JSON.parse(wData);
-    res.send(wProducts);
-});
+    let dato = fs.readFileSync('./inventario.txt', 'utf8');
+    let producto = JSON.parse(dato);
+    res.send(producto);
+})
+
+app.get('/carro', (req, res) => {
+    let dato = fs.readFileSync('./carro.txt', 'utf8');
+    let producto = JSON.parse(dato);
+    res.send(producto);
+})
+
+app.delete('/carro', (req, res) => {
+    fs.writeFileSync('./carro.txt', '[]');
+    res.send('Carrito vaciado');
+})
+
 
